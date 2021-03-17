@@ -249,25 +249,27 @@ To create a policy with an Audit effect for the minimum TLS version with the Azu
 1. Under **Policy rule**, add the following policy definition to the **policyRule** section.
 
     ```json
-    {
-      "if": {
-        "allOf": [
-          {
-            "field": "type",
-            "equals": "Microsoft.Storage/storageAccounts"
-          },
-          {
-            "not": {
-              "field":"Microsoft.Storage/storageAccounts/minimumTlsVersion",
-              "equals": "TLS1_2"
-            }
+{
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Storage/storageAccounts"
+        },
+        {
+          "not": {
+            "field": "Microsoft.Storage/storageAccounts/minimumTlsVersion",
+            "equals": "TLS1_2"
           }
-        ]
-      },
-      "then": {
-        "effect": "audit"
-      }
+        }
+      ]
+    },
+    "then": {
+      "effect": "audit"
     }
+  }
+}
     ```
 
 1. Save the policy.
@@ -312,22 +314,24 @@ To create a policy with a Deny effect for a minimum TLS version that is less tha
 
 ```json
 {
-  "if": {
-    "allOf": [
-      {
-        "field": "type",
-        "equals": "Microsoft.Storage/storageAccounts"
-      },
-      {
-        "not": {
-          "field":"Microsoft.Storage/storageAccounts/minimumTlsVersion",
-          "equals": "TLS1_2"
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Storage/storageAccounts"
+        },
+        {
+          "not": {
+            "field": "Microsoft.Storage/storageAccounts/minimumTlsVersion",
+            "equals": "TLS1_2"
+          }
         }
-      }
-    ]
-  },
-  "then": {
-    "effect": "deny"
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
   }
 }
 ```
